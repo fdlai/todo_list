@@ -1,7 +1,7 @@
 .todos {
   background-color: aliceblue;
   padding: 10px 50px 10px 20vw;
-  border-bottom: 2px solid darkred;
+  border-bottom: 2px solid rgba(130, 12, 46, 0.5);
 }
 
 .todos__header-bar {
@@ -53,8 +53,9 @@
 .list__item {
   display: flex;
   list-style-type: circle;
-  align-items: baseline;
+  align-items: center;
   gap: 10px;
+  position: relative;
 }
 
 .list__checkbox {
@@ -66,13 +67,22 @@
 
 .list__text {
   margin: 0;
+  cursor: move;
 }
 
 .list__text_complete {
   text-decoration: line-through;
 }
 
+.list__line {
+  flex: 1 1;
+  border-bottom: 4px dotted rgba(125, 125, 125, 0.2);
+  height: 4px;
+  cursor: move;
+}
+
 .list__delete-button {
+  flex-grow: 0;
   margin-left: auto;
   font-family: cursive, Courier, monospace;
   border: none;

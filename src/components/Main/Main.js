@@ -89,6 +89,18 @@ function Main() {
     }
   }
 
+  function handleDragStart(e, index) {
+    e.dataTransfer.setData("text/plain", index);
+  }
+
+  function handleDrop(e, newIndex) {
+    const oldIndex = e.dataTransfer.getData("text/plain");
+    let newItems = [...items];
+    const item = newItems.splice(oldIndex, 1)[0];
+    newItems.splice(newIndex, 0, item);
+    setItems(newItems);
+  }
+
   return (
     <div className="todos">
       <div className="todos__header-bar">
@@ -132,9 +144,16 @@ function Main() {
         </div>
       </div>
       <ul className="list">
-        {filteredItems.map((item) => {
+        {filteredItems.map((item, index) => {
           return (
-            <li key={item.id} className="list__item">
+            <li
+              key={item.id}
+              className="list__item"
+              draggable={true}
+              onDragStart={(e) => handleDragStart(e, index)}
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={(e) => handleDrop(e, index)}
+            >
               <input
                 type="checkbox"
                 className="list__checkbox"
@@ -144,11 +163,12 @@ function Main() {
               <p className={`list__text ${getListItemTextClass(item.checked)}`}>
                 {item.text}
               </p>
+              <div className="list__line"></div>
               <button
                 className="list__delete-button"
                 onClick={() => deleteItem(item.id)}
               >
-                -Delete
+                Delete
               </button>
             </li>
           );
