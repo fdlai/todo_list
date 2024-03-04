@@ -1,0 +1,11 @@
+footer {
+  background-color: rgb(255, 203, 196);
+  padding: 20px 0;
+  margin: auto 0 0 0;
+}
+
+.footer__text {
+  font-size: 18px;
+  padding-left: 20vw;
+  margin: 0;
+}

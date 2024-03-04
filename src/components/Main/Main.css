@@ -1,0 +1,82 @@
+.todos {
+  background-color: aliceblue;
+  padding: 10px 50px 10px 20vw;
+  border-bottom: 2px solid darkred;
+}
+
+.todos__header-bar {
+  display: flex;
+  gap: 100px;
+  margin-bottom: 50px;
+  align-items: center;
+}
+
+.todos__title {
+  margin: 0;
+}
+
+.todos__select {
+  cursor: pointer;
+}
+
+.todos__inputAndButtonContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.todos__input {
+  border: 1px solid black;
+  margin: 0;
+  border-radius: 5px;
+  height: 22px;
+  box-sizing: border-box;
+}
+
+.todos__add-item-button {
+  margin: 0;
+  border-radius: 5px;
+  font-family: cursive, Courier, monospace;
+  cursor: pointer;
+  height: 22px;
+}
+
+.list {
+  list-style-type: circle;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 20px;
+  padding-left: 30px;
+}
+
+.list__item {
+  display: flex;
+  list-style-type: circle;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.list__checkbox {
+  list-style-type: square;
+  margin: 0;
+  align-self: normal;
+  cursor: pointer;
+}
+
+.list__text {
+  margin: 0;
+}
+
+.list__text_complete {
+  text-decoration: line-through;
+}
+
+.list__delete-button {
+  margin-left: auto;
+  font-family: cursive, Courier, monospace;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+}
