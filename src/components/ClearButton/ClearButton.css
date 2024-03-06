@@ -1,0 +1,40 @@
+.clear-button {
+  font-family: cursive, Courier, monospace;
+  padding: 16px;
+  cursor: pointer;
+  border-radius: 13px;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  background-color: black;
+  color: white;
+  line-height: 1em;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 160px;
+  left: 25px;
+}
+
+.clear-button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.clear-button_visible {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.6s ease-in;
+}
+
+@media screen and (max-width: 620px) {
+  .clear-button {
+    top: 156px;
+    left: 303px;
+  }
+}
+@media screen and (max-width: 420px) {
+  .clear-button {
+    top: 34px;
+    left: 173px;
+  }
+}

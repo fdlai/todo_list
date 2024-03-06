@@ -6,3 +6,12 @@
 .header__title {
   margin: 0;
 }
+
+@media screen and (max-width: 400px) {
+  .header {
+    padding: 10px 30px;
+  }
+  .header__title {
+    font-size: 28px;
+  }
+}

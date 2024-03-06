@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Main.css";
 import { v4 } from "uuid";
+import ClearButton from "../ClearButton/ClearButton";
 
 function Main() {
   const [items, setItems] = useState(
@@ -11,33 +12,31 @@ function Main() {
     localStorage.getItem("filterState") || "all"
   );
 
-  const filteredItems = getFilteredItems();
+  //const filteredItems = getFilteredItems();
+
+  const hasCompletedItems = items.some((item) => item.checked);
 
   useEffect(() => {
-    storeItems();
+    localStorage.setItem("items", JSON.stringify(items));
   }, [items]);
 
   useEffect(() => {
     localStorage.setItem("filterState", filterState);
   }, [filterState]);
 
-  function getFilteredItems() {
-    if (filterState === "all") {
-      return items;
-    } else if (filterState === "active") {
-      return items.filter((item) => {
-        return item.checked === false;
-      });
-    } else if (filterState === "completed") {
-      return items.filter((item) => {
-        return item.checked === true;
-      });
-    }
-  }
-
-  function storeItems() {
-    localStorage.setItem("items", JSON.stringify(items));
-  }
+  //   function getFilteredItems() {
+  //     if (filterState === "all") {
+  //       return items;
+  //     } else if (filterState === "active") {
+  //       return items.filter((item) => {
+  //         return item.checked === false;
+  //       });
+  //     } else if (filterState === "completed") {
+  //       return items.filter((item) => {
+  //         return item.checked === true;
+  //       });
+  //     }
+  //   }
 
   function handleAddItemButtonClick(e) {
     e.preventDefault();
@@ -101,6 +100,24 @@ function Main() {
     setItems(newItems);
   }
 
+  function getListItemClass(item) {
+    if (filterState === "all") {
+      return "";
+    } else if (filterState === "active") {
+      return item.checked ? "list__item_hidden" : "";
+    } else if (filterState === "completed") {
+      return item.checked ? "" : "list__item_hidden";
+    }
+  }
+
+  function handleClearButtonClick() {
+    const updatedItems = items.filter((item) => {
+      return item.checked === false;
+    });
+    setItems(updatedItems);
+    setFilterState("all");
+  }
+
   return (
     <div className="todos">
       <div className="todos__header-bar">
@@ -144,11 +161,11 @@ function Main() {
         </div>
       </div>
       <ul className="list">
-        {filteredItems.map((item, index) => {
+        {items.map((item, index) => {
           return (
             <li
               key={item.id}
-              className="list__item"
+              className={`list__item ${getListItemClass(item)}`}
               draggable={true}
               onDragStart={(e) => handleDragStart(e, index)}
               onDragOver={(e) => e.preventDefault()}
@@ -174,6 +191,11 @@ function Main() {
           );
         })}
       </ul>
+      <ClearButton
+        onButtonClick={handleClearButtonClick}
+        filterState={filterState}
+        hasCompletedItems={hasCompletedItems}
+      />
     </div>
   );
 }

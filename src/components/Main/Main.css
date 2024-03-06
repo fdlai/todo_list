@@ -2,13 +2,15 @@
   background-color: aliceblue;
   padding: 10px 50px 10px 20vw;
   border-bottom: 2px solid rgba(130, 12, 46, 0.5);
+  position: relative;
 }
 
 .todos__header-bar {
   display: flex;
-  gap: 100px;
   margin-bottom: 50px;
   align-items: center;
+  max-width: 445px;
+  justify-content: space-between;
 }
 
 .todos__title {
@@ -17,6 +19,7 @@
 
 .todos__select {
   cursor: pointer;
+  font-family: cursive, Courier, monospace;
 }
 
 .todos__inputAndButtonContainer {
@@ -58,6 +61,10 @@
   position: relative;
 }
 
+.list__item_hidden {
+  display: none;
+}
+
 .list__checkbox {
   list-style-type: square;
   margin: 0;
@@ -89,4 +96,36 @@
   background-color: transparent;
   padding: 0;
   cursor: pointer;
+}
+
+@media screen and (max-width: 620px) {
+  .todos {
+    padding: 10px 30px;
+  }
+  .todos__header-bar {
+    flex-direction: column;
+    gap: 0px;
+    align-items: normal;
+  }
+  .todos__subtitle {
+    font-size: 22px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .todos__inputAndButtonContainer {
+    flex-direction: column;
+  }
+  .todos__subtitle {
+    font-size: 20px;
+  }
+  .list {
+    padding: 0;
+  }
+  .list__text {
+    font-size: 16px;
+  }
+  .list__delete-button {
+    font-size: 10px;
+  }
 }
