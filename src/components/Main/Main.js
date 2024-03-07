@@ -12,8 +12,6 @@ function Main() {
     localStorage.getItem("filterState") || "all"
   );
 
-  //const filteredItems = getFilteredItems();
-
   const hasCompletedItems = items.some((item) => item.checked);
 
   useEffect(() => {
@@ -23,20 +21,6 @@ function Main() {
   useEffect(() => {
     localStorage.setItem("filterState", filterState);
   }, [filterState]);
-
-  //   function getFilteredItems() {
-  //     if (filterState === "all") {
-  //       return items;
-  //     } else if (filterState === "active") {
-  //       return items.filter((item) => {
-  //         return item.checked === false;
-  //       });
-  //     } else if (filterState === "completed") {
-  //       return items.filter((item) => {
-  //         return item.checked === true;
-  //       });
-  //     }
-  //   }
 
   function handleAddItemButtonClick(e) {
     e.preventDefault();
@@ -100,16 +84,6 @@ function Main() {
     setItems(newItems);
   }
 
-  function getListItemClass(item) {
-    if (filterState === "all") {
-      return "";
-    } else if (filterState === "active") {
-      return item.checked ? "list__item_hidden" : "";
-    } else if (filterState === "completed") {
-      return item.checked ? "" : "list__item_hidden";
-    }
-  }
-
   function handleClearButtonClick() {
     const updatedItems = items.filter((item) => {
       return item.checked === false;
@@ -162,10 +136,16 @@ function Main() {
       </div>
       <ul className="list">
         {items.map((item, index) => {
+          if (filterState === "active" && item.checked === true) {
+            return null;
+          }
+          if (filterState === "completed" && item.checked === false) {
+            return null;
+          }
           return (
             <li
               key={item.id}
-              className={`list__item ${getListItemClass(item)}`}
+              className={`list__item`}
               draggable={true}
               onDragStart={(e) => handleDragStart(e, index)}
               onDragOver={(e) => e.preventDefault()}
